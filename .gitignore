@@ -1,0 +1,16 @@
+#build folder
+/build/
+
+
+#executables
+*.exe
+*.obj
+*.dll
+
+#temp files
+*.log
+*.tmp
+*.user
+*.suo
+*.ipch
+*.pch
