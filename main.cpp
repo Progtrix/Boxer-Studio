@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR args, int nCmdShow) {
             }
                 
         }
-        
+        Sleep(5);
     }
      
 
